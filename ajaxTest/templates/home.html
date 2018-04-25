@@ -1,0 +1,61 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark text-center">
+    <form class="form-inline text-center" action="" method="post" id='HandleForm'>
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Twitter Handle(without @)" name='handle' id = 'handle'>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </nav>
+
+  <div>
+    <ul class="list-group text-center" id="tweet_table">
+      <li class="list-group-item"><h3>Last 10 Tweets!</h3></li>
+    </ul>
+  </div>
+</body>
+<footer>
+  <script>
+  $("#HandleForm").on("submit", function (event) {
+     event.preventDefault();
+     var handle = $('#handle').val();
+     get_tweets(handle);
+  });
+
+  function get_tweets(handle){
+    $.ajax({
+        url : "ajax/returntweets/",
+        type : "GET",
+        data : {handle_data : handle},
+        success : function(json){
+          var response = $.parseJSON(json)['tweet_data']
+          $('#tweet_table').append('<li class="list-group-item list-group-item-success">Tweets of @' + handle + '</li>');
+
+          for(i=0;i<response.length;i++){
+            $('#tweet_table').append('<li class="list-group-item">'+response[i]+'</li>');
+          }
+          $('#tweet_table').append('<li class="list-group-item list-group-item-warning">Tweets End Here!</li>');
+
+        },
+    });
+  }
+</script>
+</footer>
