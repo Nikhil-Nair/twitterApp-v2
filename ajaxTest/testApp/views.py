@@ -10,10 +10,10 @@ def home(request):
     return render(request, "home.html", {})
 
 def return_tweets(request):
-    APIKey = 'gsNjofuTL10QjgZsXyqx2BVUM'
-    APISecret = '8Fw8FxIckg8mzBNhzw6F13xwajnJ3zeTRKBrtCUIP800pd419y'
-    AccessToken = '829621842067480576-Fcttbju0ICSIJ5hqf5UJyFnSWE74Gx8'
-    AccessTokenSecret = 'a4ciLooQa0aQHvBD0Tpyeuz7mJgnkbzJpD0cRM2binvDx'
+    APIKey = ''
+    APISecret = ''
+    AccessToken = ''
+    AccessTokenSecret = ''
 
     url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
 
