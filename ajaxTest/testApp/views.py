@@ -15,6 +15,7 @@ def return_tweets(request):
     AccessToken = ''
     AccessTokenSecret = ''
 
+
     url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
 
     auth = OAuth1(APIKey, APISecret, AccessToken, AccessTokenSecret)
@@ -31,5 +32,5 @@ def return_tweets(request):
     else:
         tweets.append("Invalid Handle")
 
-    response_data = {'tweet_data' : tweets}
+    response_data = {"tweet_data" : tweets}
     return HttpResponse(json.dumps(response_data))
